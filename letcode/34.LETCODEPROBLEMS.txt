@@ -1,7 +1,3 @@
-https://vnspoj.github.io/top-interview-questions/array/binary-search/2019/01/08/find-first-and-last-position-of-element-in-sorted-array.html
-
-
-
 
 /**
  * @param {number[]} nums
