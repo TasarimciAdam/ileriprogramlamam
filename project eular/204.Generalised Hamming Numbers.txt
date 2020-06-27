@@ -1,0 +1,45 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var getPrimesUpTo = function(n) {
+	var intMax = n+1;
+	var primes = [];
+	for(var i = 0; i < intMax; i++) { 
+		primes[i] = 1;
+	}
+
+	for(var i = 2; i < intMax; i++) {
+		if(primes[i]) {
+			for(var j = 2; i*j < intMax; j++) {
+				primes[i*j] = 0;
+			}
+		}
+	}
+
+	var primeList = [];
+	for(var i = 2; i < intMax; i++) {
+		if(primes[i] == 1) {
+			primeList.push(i);
+		}
+	}
+	return primeList;
+}
+
+var type = 100;
+var primes = getPrimesUpTo(type);
+var searchCombosUnder = function(product, index, max) {
+	if(product > max) {return 0;}
+	if(index >= primes.length) {return 1;}
+
+	var count = 0;
+	while(product <= max) {
+		count += searchCombosUnder(product, index+1, max);
+		product *= primes[index];
+	}
+	return count;
+};
+
+
+console.log(searchCombosUnder(1, 0, 1000000000));

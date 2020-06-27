@@ -1,0 +1,35 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var numDigits = 20;
+var numSolutions = 0;
+
+// var searchValu
+var memo = {};
+
+var search = function(digit, lastThree) {
+	var count = 0;
+	if(digit == numDigits) {return 1;}
+
+	var sum = lastThree[1] + lastThree[2];
+
+	var mapKey = "" + digit + "-" + lastThree[1] + "-" + lastThree[2];
+	if(memo[mapKey]) {return memo[mapKey];}
+
+	for(var i = 0; i+sum <= 9; i++) {
+		if(digit == 0 && i == 0) {
+
+		} else {
+			count += search(digit+1, [lastThree[1],lastThree[2],i]);
+		}
+	}
+
+	var mapKey = "" + digit + "-" + lastThree[1] + "-" + lastThree[2];
+	memo[mapKey] = count;
+
+	return count;
+};
+
+console.log(search(0,[0,0,0]));
